@@ -120,7 +120,7 @@
 //         </div>
 //         {errors.agree && <p className="text-red-600 text-sm mt-1">{errors.agree}</p>}
 
-        
+
 //         {/* <div className="border mt-4 p-3 text-center text-gray-500 text-sm">
 //           [reCAPTCHA would go here]
 //         </div> */}
@@ -158,15 +158,51 @@ export default function ContactForm() {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  // ) => {
+  //   const { name, value, type } = e.target;
+  //   const checked = (e.target as HTMLInputElement).checked;
+
+  //   setFormData({
+  //     ...formData,
+  //     [name]: type === "checkbox" ? checked : value,
+  //   });
+
+  //   setErrors({
+  //     ...errors,
+  //     [name]: "",
+  //   });
+  // };
+
+
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
-    setErrors({ ...errors, [name]: "" });
+    const { name, value, type } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+    });
+
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
   };
+
+
+
+  // const handleChange = (
+  //   e: React.ChangeEvent<
+  //     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  //   >
+  // ) => {
+  //   const { name, value, type, checked } = e.target;
+  //   setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+  //   setErrors({ ...errors, [name]: "" });
+  // };
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
