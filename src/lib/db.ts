@@ -43,18 +43,24 @@ if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
 }
 
-// Define global cache with proper type
+// Type-safe cache interface
 interface MongooseCache {
   conn: Mongoose | null;
   promise: Promise<Mongoose> | null;
 }
 
-// Attach to globalThis so it persists across hot reloads in dev
-let cached: MongooseCache = (globalThis as any).mongoose;
-
-if (!cached) {
-  cached = (globalThis as any).mongoose = { conn: null, promise: null };
+// Extend global object with mongoose cache
+declare global {
+  var mongoose: MongooseCache | undefined;
 }
+
+// Assign cache safely
+const cached: MongooseCache = global.mongoose ?? {
+  conn: null,
+  promise: null,
+};
+
+global.mongoose = cached;
 
 export default async function connectDB(): Promise<Mongoose> {
   if (cached.conn) return cached.conn;
