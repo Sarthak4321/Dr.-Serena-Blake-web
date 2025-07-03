@@ -1,4 +1,10 @@
+import Image from "next/image";
+
+
+
+
 export default function AboutSection() {
+
   return (
     <section className="bg-[#F7F5EF] py-16 px-6 lg:px-24">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
@@ -33,10 +39,12 @@ export default function AboutSection() {
 
         {/* Image */}
         <div className="lg:w-1/3">
-          <img
+          <Image
             src="/dr-serenablake.webp"
             alt="Dr. Serena Blake"
-            className="rounded-lg shadow-lg object-cover w-full"
+            width={400}
+            height={500}
+            className="rounded-lg shadow-lg object-cover w-full h-auto"
           />
         </div>
       </div>

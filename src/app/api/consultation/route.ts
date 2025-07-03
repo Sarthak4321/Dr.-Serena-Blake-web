@@ -31,7 +31,7 @@
 
 
 import { NextRequest, NextResponse } from 'next/server';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import { Consultation } from '@/models/Consultation';
 import connectDB from "@/lib/db";
 
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
 
     // ✅ Correct way to redirect after POST
     return NextResponse.redirect(new URL('/confirmation', req.url));
-  } catch (error) {
-    return NextResponse.json({ error: 'Submission failed' }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }

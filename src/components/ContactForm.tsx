@@ -169,7 +169,7 @@ export default function ContactForm() {
   };
 
   const validate = () => {
-    let newErrors: { [key: string]: string } = {};
+    const newErrors: { [key: string]: string } = {};
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.email) newErrors.email = "Email is required";
     if (!formData.phone) newErrors.phone = "Phone is required";
@@ -238,7 +238,7 @@ export default function ContactForm() {
               name={field}
               className="w-full border border-green-800 rounded p-2 mt-1"
               placeholder={field === "email" ? "you@example.com" : ""}
-              value={(formData as any)[field]}
+              value={(formData as Record<string, string | boolean>)[field]}
               onChange={handleChange}
             />
             {errors[field] && (
@@ -276,7 +276,7 @@ export default function ContactForm() {
             onChange={handleChange}
           />
           <p className="text-xs text-gray-500 mt-1">
-            Let us know when you're typically available
+            By clicking submit you consent to receive texts and emails from Dr. Marcia T. Norman
           </p>
           {errors.preferredTime && (
             <p className="text-red-600 text-sm mt-1">{errors.preferredTime}</p>
